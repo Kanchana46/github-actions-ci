@@ -32,5 +32,5 @@ jobs:
       run:  docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     - name: Push image to docker hub
       run: |
-          docker login -u  -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}   
