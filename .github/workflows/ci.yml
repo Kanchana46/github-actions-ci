@@ -25,3 +25,12 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Build image
+      run:  docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+    - name: Push image to docker hub
+      run: |
+          docker login -u  -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}   
